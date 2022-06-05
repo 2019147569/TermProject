@@ -71,13 +71,14 @@ function initialize_b(list){
                 const heading = document.createElement('h2');
                 const form = document.createElement("form");
                 const selection = document.createElement('select');
-                for(let i=0;i<list[index].Sits.length;i++){
+                for(let i=0;i<list[index].Sits_kakao.length;i++){
                     let option = document.createElement('option');
-                    option.innerHTML = list[index].Sits[i][0];
-                    option.setAttribute("value", list[index].Sits[i][0]);
-                    option.style.color = list[index].Sits[i][1];
+                    option.innerHTML = list[index].Sits_kakao[i].name;
+                    option.setAttribute("value", i);
+                    option.style.color = list[index].Sits_kakao[i].color;
                     selection.appendChild(option);
                 }
+                selection.setAttribute('name', 'seat');
                 const submit = document.createElement('button');
                 submit.onclick = function(){
                     
@@ -92,6 +93,8 @@ function initialize_b(list){
                     .catch( err => console.error(`Fetch problem: ${err.message}`) );
                 }
                 submit.innerHTML = '좌석이미지 불러오기';
+                form.setAttribute('method', 'get');
+                form.setAttribute('action', `/stadium/${list[index].id}`);
                 form.appendChild(submit);
                 form.appendChild(selection);
 

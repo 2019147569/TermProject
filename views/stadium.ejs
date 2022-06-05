@@ -2,27 +2,52 @@
 
 <html>
     <head>
-        <title><%= stadiumName %></title>
+        <title><%= locals.stadiumName %></title>
         <meta charset="utf-8">
     </head>
     <body>
-        <div id="roadview" style="width:500px;height:400px;"></div>
-
-
+        
+        <div id="roadview0" style="width:500px;height:400px;"></div>
+        <button id="button">&gt;</button>
 
         
+
 	    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=873146e7a0afc870594980aeeae20abf"></script>
         <script>
-            var roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
-            var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
-            var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+            var i = 0;
+            var arr = [<%= coordinate %>];
 
-            var position = new kakao.maps.LatLng(37.512764, 127.072096);
+            var roadviewContainer = document.getElementById(`roadview0`); //로드뷰를 표시할 div
+                var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
+                var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
             
-            // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
-            roadviewClient.getNearestPanoId(position, 50, function(panoId) {
+                var position = new kakao.maps.LatLng(arr[i], arr[i+1]);
+            
+                // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+                roadviewClient.getNearestPanoId(position, 50, function(panoId) {
                 roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
             });
+            
+            document.getElementById("button").addEventListener("click", function(){
+
+                if(i+2==arr.length){
+                i=0;
+            }else{
+                i+=2;
+            }
+                var roadviewContainer = document.getElementById(`roadview0`); //로드뷰를 표시할 div
+                var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
+                var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+            
+                var position = new kakao.maps.LatLng(arr[i], arr[i+1]);
+            
+                // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+                roadviewClient.getNearestPanoId(position, 50, function(panoId) {
+                roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+            });
+
+            });
+            
         </script>
     </body>
 </html>

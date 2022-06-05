@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 
+const appkey = '873146e7a0afc870594980aeeae20abf';
 
 router.route('/:stadium_id')
     .get((req, res) => {
@@ -31,7 +32,8 @@ router.route('/:stadium_id')
                     coordinate: coor, 
                     stadiumName: stadiumName, 
                     seatName: seatName,
-                    imageCount: imageCount
+                    imageCount: imageCount,
+                    appkey: appkey
                 });
             }
         });

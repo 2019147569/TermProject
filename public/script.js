@@ -89,6 +89,12 @@ function initialize_b(list){
                 form.appendChild(submit);
                 form.appendChild(selection);
 
+                const sportSelect = document.createElement('input');
+                sportSelect.setAttribute('type', 'hidden');
+                sportSelect.setAttribute('name', 'sport');
+                sportSelect.setAttribute('value', 'baseball');
+                form.appendChild(sportSelect);
+
     
                 heading.innerHTML = list[index].name;
     
@@ -186,7 +192,13 @@ function initialize_f(list){
                 form.appendChild(submit);
                 form.appendChild(selection);
 
-    
+                
+                const sportSelect = document.createElement('input');
+                sportSelect.setAttribute('type', 'hidden');
+                sportSelect.setAttribute('name', 'sport');
+                sportSelect.setAttribute('value', 'football');
+                form.appendChild(sportSelect);
+
                 heading.innerHTML = list[index].name;
     
                 image.src = objectURL;

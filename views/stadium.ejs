@@ -6,8 +6,12 @@
         <meta charset="utf-8">
     </head>
     <body>
-        
+        <h1><%= locals.stadiumName %></h1>
+        <h2><%= locals.seatName %></h2>
         <div id="roadview0" style="width:500px;height:400px;"></div>
+
+        <p id="imageCount"></p>
+
         <button id="button">&gt;</button>
         <button id="full">Full</button>
 
@@ -27,8 +31,13 @@
                 // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
                 roadviewClient.getNearestPanoId(position, 50, function(panoId) {
                 roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+                
             });
             
+            var imageCount = document.getElementById('imageCount');
+            imageCount.innerHTML = `${i / 2 + 1} / ${<%= imageCount %>}`;
+            
+
             document.getElementById("button").addEventListener("click", function(){
 
                 if(i+2==arr.length){
@@ -47,6 +56,8 @@
                 roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
                 });
 
+                var imageCount = document.getElementById('imageCount');
+                imageCount.innerHTML = `${i / 2 + 1} / ${<%= imageCount %>}`;
             });
 
             document.getElementById('full').addEventListener('click', (e) => {

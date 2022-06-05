@@ -82,15 +82,6 @@ function initialize_b(list){
                 const submit = document.createElement('button');
                 submit.onclick = function(){
                     
-                    fetch('https://maps.googleapis.com/maps/api/streetview?pano=h85r1TZ7eSFhqYG47&size=456x456&key=AIzaSyCMZ8_8UqfDh6qP98b3vXR2kKPxu6srErk')
-                    .then(response => {
-                        if (!response.ok){
-
-                        }
-                        return response.blob();
-                    })
-                    .then( blob => show_img(blob))
-                    .catch( err => console.error(`Fetch problem: ${err.message}`) );
                 }
                 submit.innerHTML = '좌석이미지 불러오기';
                 form.setAttribute('method', 'get');
@@ -106,7 +97,7 @@ function initialize_b(list){
                 
                 main.appendChild(heading);
                 main.appendChild(image);
-                main.appendChild(form)
+                main.appendChild(form);
             }
         });
     });
@@ -177,6 +168,24 @@ function initialize_f(list){
                 const objectURL = URL.createObjectURL(blob);
                 const image = document.createElement('img');
                 const heading = document.createElement('h2');
+                const form = document.createElement("form");
+                const selection = document.createElement('select');
+                for(let i=0;i<list[index].Sits_kakao.length;i++){
+                    let option = document.createElement('option');
+                    option.innerHTML = list[index].Sits_kakao[i].name;
+                    option.setAttribute("value", i);
+                    option.style.color = list[index].Sits_kakao[i].color;
+                    selection.appendChild(option);
+                }
+                selection.setAttribute('name', 'seat');
+                const submit = document.createElement('button');
+
+                submit.innerHTML = '좌석이미지 불러오기';
+                form.setAttribute('method', 'get');
+                form.setAttribute('action', `/stadium/${list[index].id}`);
+                form.appendChild(submit);
+                form.appendChild(selection);
+
     
                 heading.innerHTML = list[index].name;
     
@@ -185,6 +194,7 @@ function initialize_f(list){
                 
                 main.appendChild(heading);
                 main.appendChild(image);
+                main.appendChild(form);
             }
         });
     });

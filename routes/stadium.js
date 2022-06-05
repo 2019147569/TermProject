@@ -2,10 +2,6 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 
-router.route('/')
-    .get((req, res) => {
-        
-    })
 
 router.route('/:stadium_id')
     .get((req, res) => {

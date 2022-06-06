@@ -20,7 +20,7 @@ fetch('baseball.json')
 })
 .then( json => initialize_b(json) )
 .catch( err => console.error(`Fetch problem: ${err.message}`) );
-
+console.log("zz");
 function initialize_b(list){
     document.getElementById("baseball_list").childNodes.forEach(function(each){
         each.addEventListener("click", function(e){
@@ -80,10 +80,14 @@ function initialize_b(list){
                 }
                 selection.setAttribute('name', 'seat');
                 const submit = document.createElement('button');
+                
                 submit.onclick = function(){
                     
                 }
+                
                 submit.innerHTML = '좌석이미지 불러오기';
+                submit.style.cssText  = 'width: 220px; height: 50px; color: white; background-color: black; outline: none; margin:2px';
+                selection.style.cssText  = 'width: 220px; height: 50px; color: white; background-color: black; outline: none; margin:2px';
                 form.setAttribute('method', 'get');
                 form.setAttribute('action', `/stadium/${list[index].id}`);
                 form.appendChild(submit);
@@ -97,7 +101,6 @@ function initialize_b(list){
 
     
                 heading.innerHTML = list[index].name;
-    
                 image.src = objectURL;
                 image.alt = list[index].name;
                 
@@ -187,6 +190,8 @@ function initialize_f(list){
                 const submit = document.createElement('button');
 
                 submit.innerHTML = '좌석이미지 불러오기';
+                submit.style.cssText  = 'width: 220px; height: 50px; color: white; background-color: black; outline: none; margin:2px';
+                selection.style.cssText  = 'width: 220px; height: 50px; color: white; background-color: black; outline: none; margin:2px';
                 form.setAttribute('method', 'get');
                 form.setAttribute('action', `/stadium/${list[index].id}`);
                 form.appendChild(submit);

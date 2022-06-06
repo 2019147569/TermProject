@@ -4,17 +4,112 @@
     <head>
         <title><%= locals.stadiumName %></title>
         <meta charset="utf-8">
+        
     </head>
+    <style>
+        .stadTit{
+            text-align: center;
+        }
+        .seatTit{
+            text-align: center;
+        }
+        .road{
+            margin: auto;
+            padding: 10px;
+            width: 500px;
+            height: 400px;
+            position: relative;
+        }
+        .count{
+            text-align: center;
+        }
+        .buttonDiv{
+            justify-content: center;
+            display: flex;
+            position: relative;
+        }
+        body {
+            font-family: "Lato";
+            font-size: 100%;
+            overflow-y: scroll;
+            font-family: sans-serif;
+            background-color: #0d0d0d;
+            margin: 0;
+            max-width: 1020px;
+            color: #b3b3b3;
+        }
+
+            .banjak {
+                width: 220px;
+                height: 50px;
+                border: none;
+                outline: none;
+                color: white;
+                background: black;
+                cursor: pointer;
+                position: relative;
+                z-index: 0;
+                border-radius: 10px;
+                margin: 2px;
+            }
+
+            .banjak:before {
+                content: '';
+                background: linear-gradient(45deg, red, orange, yellow, green, cyan, blue, purple, pink, red);
+                position: absolute;
+                top: -2px;
+                left:-2px;
+                background-size: 400%;
+                z-index: -1;
+                filter: blur(5px);
+                width: calc(100% + 4px);
+                height: calc(100% + 4px);
+                animation: glowing 20s linear infinite;
+                opacity: 0;
+                transition: opacity .3s ease-in-out;
+                border-radius: 10px;
+            }
+
+            .banjak:active {
+                color: #000
+            }
+
+            .banjak:active:after {
+                background: transparent;
+            }
+
+            .banjak:hover:before {
+                opacity: 1;
+            }
+
+            .banjak:after {
+                z-index: -1;
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: black;
+                left: 0;
+                top: 0;
+                border-radius: 10px;
+            }
+
+            @keyframes glowing {
+                0% { background-position: 0 0; }
+                50% { background-position: 400% 0; }
+                100% { background-position: 0 0; }
+            }
+        </style>
     <body>
-        <h1><%= locals.stadiumName %></h1>
-        <h2><%= locals.seatName %></h2>
-        <div id="roadview0" style="width:500px;height:400px;"></div>
+        <h1 class="stadTit"><%= locals.stadiumName %></h1>
+        <h2 class="seatTit"><%= locals.seatName %></h2>
+        <div class="road" id="roadview0"></div>
 
-        <p id="imageCount"></p>
-
-        <button id="button">&gt;</button>
-        <button id="full">Full</button>
-
+        <p class="count" id="imageCount"></p>
+        <div class="buttonDiv">
+            <button class="banjak" id="button">Next</button>
+            <button class="banjak" id="full">Full</button>
+        </div>
         
 
 	    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%= appkey %>"></script>
@@ -23,15 +118,14 @@
             var arr = [<%= coordinate %>];
 
             var roadviewContainer = document.getElementById(`roadview0`); //로드뷰를 표시할 div
-                var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
-                var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+            var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
+            var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
             
-                var position = new kakao.maps.LatLng(arr[i], arr[i+1]);
+            var position = new kakao.maps.LatLng(arr[i], arr[i+1]);
             
                 // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
-                roadviewClient.getNearestPanoId(position, 50, function(panoId) {
-                roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
-                
+            roadviewClient.getNearestPanoId(position, 50, function(panoId) {
+                roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행   
             });
             
             var imageCount = document.getElementById('imageCount');
@@ -41,19 +135,20 @@
             document.getElementById("button").addEventListener("click", function(){
 
                 if(i+2==arr.length){
-                i=0;
-                }else{
-                i+=2;
+                    i=0;
                 }
-                var roadviewContainer = document.getElementById('roadview0'); //로드뷰를 표시할 div
-                var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
-                var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+                else{
+                    i+=2;
+                }
+                var roadviewContainer = document.getElementById(`roadview0`);
+                var roadview = new kakao.maps.Roadview(roadviewContainer);
+                var roadviewClient = new kakao.maps.RoadviewClient();
             
                 var position = new kakao.maps.LatLng(arr[i], arr[i+1]);
             
-                // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+                
                 roadviewClient.getNearestPanoId(position, 50, function(panoId) {
-                roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+                roadview.setPanoId(panoId, position);
                 });
 
                 var imageCount = document.getElementById('imageCount');
@@ -61,7 +156,7 @@
             });
 
             document.getElementById('full').addEventListener('click', (e) => {
-                    toggleFullScreen();
+                toggleFullScreen();
             })
 
             function toggleFullScreen() {

@@ -1,5 +1,117 @@
-#wrap {
-    width: 1020px;
-    margin: auto;
-    /* border: 1px solid black; */
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600);
+body {
+    font-family: "Lato";
+    font-size: 100%;
+    overflow-y: scroll;
+    font-family: sans-serif;
+    background-color: #0d0d0d;
+    margin: 0;
+    max-width: 1020px;
+    color: #b3b3b3;
+}
+
+.temp{
+    position: relative;
+}
+
+.list {
+    display: flex;
+    position: relative;
+    font-weight: 400;
+    font-size: 1.2em;
+    width: 100%;
+    float: right;
+}
+
+
+
+.base{
+    width: 50%;
+    text-align: center;
+    font-size: 1.2em;
+    position: absolute;
+}
+
+.foot{
+    width: 50%;
+    text-align: center;
+    font-size: 1.2em;
+    left: 50%;
+    position: absolute;
+}
+
+.bl, .fl{
+    display: flex;
+    position: relative;
+    background-color:  #333333;
+    font-size: 0.8em;
+    width: 100%;
+    text-align: center;
+    clear: both;
+    border: 2px solid black;
+}
+
+.bl a, .fl a{
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.near{
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.break{
+    opacity: 0;
+}
+
+.maiiin{
+    text-align: center;
+}
+
+a:hover{
+    border-bottom: 2px solid black;
+    background-color:  #333333;
+    color:white;
+}
+
+.title
+{
+    background-image: linear-gradient(
+        -225deg,
+        #231557 0%,
+        #44107a 29%,
+        #ff1361 67%,
+        #fff800 100%
+    );
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: white;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: sururuk 2s linear infinite;
+    
+    font-size: 2.0em;
+    text-align: center;
+}
+
+@keyframes sururuk {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.nearDiv{
+    border-bottom: 2px solid black;
+}
+.near:hover{
+    color: white;
+}
+
+.tit{
+    color:red;
 }
